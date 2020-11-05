@@ -11,9 +11,13 @@ RUN apt-get update && \
       python3-dev \
       build-essential \
       libncurses-dev \
+      locales \
       && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen en_US.UTF-8
 
 COPY ./deps/vim/vim /tmp/vim
 
