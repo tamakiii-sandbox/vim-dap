@@ -1,4 +1,4 @@
-.PHONY: help clean
+.PHONY: help setup dependencies install vim clean
 
 help:
 	@cat $(firstword $(MAKEFILE_LIST))
@@ -11,13 +11,20 @@ dependencies:
 
 install: \
 	~/.vimrc \
-	~/.vim/autoload/plug.vim
+	~/.vim/autoload/plug.vim \
+	~/.vim/plugged
+
+vim:
+	vim ~/.vimrc
 
 ~/.vimrc: .vimrc
 	ln -sfnv $(realpath $<) $@
 
 ~/.vim/autoload/plug.vim: ~/.vim/autoload
 	curl -fLo $@ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+~/.vim/plugged: ~/.vim
+	vim -c 'PlugInstall!' -c 'qa!'
 
 ~/.vim/autoload: ~/.vim
 	mkdir -p $@

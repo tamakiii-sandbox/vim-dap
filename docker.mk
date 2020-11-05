@@ -5,7 +5,8 @@ help:
 
 setup: \
 	dependencies \
-	.env
+	.env \
+	vim/deps/vim/vim
 
 dependencies:
 	@type docker-compose > /dev/null
@@ -16,5 +17,9 @@ build:
 .env:
 	echo ""  > $@
 
-clean:
+vim/deps/vim/vim: vim/docker.mk
+	make -f $< setup
+
+clean: vim/docker.mk
 	rm -rf .env
+	make -f $< clean

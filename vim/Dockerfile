@@ -5,10 +5,42 @@ RUN apt-get update && \
       ca-certificates \
       curl \
       make \
-      vim \
+      less \
       git \
+      python3 \
+      python3-dev \
+      build-essential \
+      libncurses-dev \
       && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+COPY ./deps/vim/vim /tmp/vim
+
+RUN cd /tmp/vim && \
+    ./configure \
+      # --prefix=#{HOMEBREW_PREFIX} \
+      # --mandir=#{man} \
+      --enable-multibyte \
+      --with-tlib=ncurses \
+      # --with-compiledby=Homebrew \
+      --enable-cscope \
+      --enable-terminal \
+      # --enable-perlinterp \
+      # --enable-rubyinterp \
+      --enable-python3interp \
+      --enable-gui=no \
+      --without-x \
+      # --enable-luainterp \
+      # --with-lua-prefix=#{Formula["lua"].opt_prefix} \
+      --with-python3-config-dir=/usr/lib/python3.7/config-3.7m-x86_64-linux-gnu/ \
+      --enable-fail-if-missing \
+      && \
+    make -C src && \
+    make -C src install
+
+RUN rm -rf /tmp/vim && \
+    apt-get auto-remove -y && \
+    apt-get clean
 
 WORKDIR /work/vim
