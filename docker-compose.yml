@@ -2,14 +2,12 @@ version: "3.8"
 services:
   vim:
     build: ./vim
-    # command: make setup install; vim ../php/src/hello.php
     tty: true
     volumes:
       - .:/app
 
   php:
     build: ./php
-    # command: make run
     tty: true
     volumes:
       - .:/app
