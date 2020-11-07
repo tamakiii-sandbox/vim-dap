@@ -1,4 +1,4 @@
-.PHONY: help setup dependencies build clean
+.PHONY: help setup dependencies build bash vim clean
 
 help:
 	@cat $(firstword $(MAKEFILE_LIST))
@@ -15,6 +15,9 @@ deps/vim: deps
 
 deps:
 	mkdir -p $@
+
+bash: ../docker-compose.yml
+	docker-compose -f $< run --rm vim $@
 
 clean:
 	rm -rf deps

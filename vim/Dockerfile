@@ -47,4 +47,7 @@ RUN rm -rf /tmp/vim && \
     apt-get auto-remove -y && \
     apt-get clean
 
-WORKDIR /work/vim
+COPY . /app/vim
+RUN make -C /app/vim install
+
+WORKDIR /app

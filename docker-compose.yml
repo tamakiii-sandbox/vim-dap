@@ -5,12 +5,12 @@ services:
     # command: make setup install; vim ../php/src/hello.php
     tty: true
     volumes:
-      - .:/work
+      - .:/app
 
   php:
     build: ./php
     # command: make run
     tty: true
     volumes:
-      - .:/work
-      - ./php/usr/local/etc/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - .:/app
+      # - ./php/usr/local/etc/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
