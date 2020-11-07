@@ -50,3 +50,5 @@ set incsearch
 call plug#begin('~/.vim/plugged')
 Plug 'vim-vdebug/vdebug'
 call plug#end()
+
+colorscheme koehler
